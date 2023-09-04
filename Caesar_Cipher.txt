@@ -1,0 +1,58 @@
+## Запросы
+encryption = input() ## Шифрование или дешифрование (k или d)
+lenguage = input() ## Язык алфавита (ru или eng)
+step = int(input()) ## Шаг сдвига
+s = input() ## Исходный текст
+
+## выбор алфавита
+if lenguage == eng:
+    alphabet = abcdefghijklmnopqrstuvwxyz
+    alphabet_2 = ABCDEFGHIJKLMNOPQRSTUVWXYZ
+elif lenguage == ru:
+    alphabet = абвгдежзийклмнопрстуфхцчшщъыьэюя
+    alphabet_2 = АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ 
+        
+## Функция кодирования
+def Caesar_Cipher_k(st, n, alphabet, alphabet_2):
+    words = st.split() ## создание списка слов из одной строки
+    words_result =  ## объявление переменной в которой будет итоговая строка
+    s2 = alphabet[n:] + alphabet[:n] ## строка алфавита строчных букв со сдвигом
+    s2_2 = alphabet_2[n:] + alphabet_2[:n] ## строка алфавита заглавных букв со сдвигом
+    for i in range(len(words)):
+        s3 = words[i] 
+        s_result =  ## строка для записи очередной кодированной строки
+        for j in range(len(s3)):
+            if s3[j] in alphabet:
+                s_result += s2[alphabet.index(s3[j])] ## находим букву исходной строки в s2, затем её индекс и записываем в ответ букву с таким же индексом как s2
+            elif s3[j] in alphabet_2:
+                s_result += s2_2[alphabet_2.index(s3[j])]
+            else:
+                s_result += s3[j] ## усли попался символ, то оставляем его на том же месте
+        words_result += s_result +   ## формируем итоговую строку
+    return words_result
+
+## Функция декодирования
+def Caesar_Cipher_d(st, n, alphabet, alphabet_2):
+    words = st.split() ## создание списка слов из одной строки
+    words_result =  ## объявление переменной в которой будет итоговая строка
+    s2 = alphabet[n:] + alphabet[:n] ## строка алфавита строчных букв со сдвигом
+    s2_2 = alphabet_2[n:] + alphabet_2[:n] ## строка алфавита заглавных букв со сдвигом
+
+    for i in range(len(words)):
+        s3 = words[i] 
+        s_result =  ## строка для записи очередной кодированной строки
+        for j in range(len(s3)):
+            if s3[j] in alphabet:
+                s_result += alphabet[s2.index(s3[j])] ## находим букву исходной строки в s2, затем её индекс и записываем в ответ букву с таким же индексом как s2
+            elif s3[j] in alphabet_2:
+                s_result += alphabet_2[s2_2.index(s3[j])]
+            else:
+                s_result += s3[j] ## усли попался символ, то оставляем его на том же месте
+        words_result += s_result +   ## формируем итоговую строку
+    return words_result
+
+if encryption == k:
+    print(Caesar_Cipher_k(s, step, alphabet, alphabet_2))
+elif encryption == d:
+    print(Caesar_Cipher_d(s, step, alphabet, alphabet_2))
+    print(Caesar_Cipher_d(s, step, alphabet, alphabet_2))
